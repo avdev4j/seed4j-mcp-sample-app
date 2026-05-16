@@ -102,6 +102,23 @@ class PetsApplicationServiceTest {
   }
 
   @Test
+  void shouldListAllPets() {
+    Pet pet = new Pet(PetId.newId(), new PetName("umee"), BreedId.newId());
+    when(pets.findAll()).thenReturn(java.util.List.of(pet));
+
+    assertThat(service.findAll()).containsExactly(pet);
+  }
+
+  @Test
+  void shouldGetExistingPet() {
+    PetId id = PetId.newId();
+    Pet pet = new Pet(id, new PetName("umee"), BreedId.newId());
+    when(pets.findById(id)).thenReturn(Optional.of(pet));
+
+    assertThat(service.get(id)).isEqualTo(pet);
+  }
+
+  @Test
   void shouldThrowWhenGettingUnknownPet() {
     PetId id = PetId.newId();
     when(pets.findById(id)).thenReturn(Optional.empty());

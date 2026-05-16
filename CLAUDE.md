@@ -10,6 +10,7 @@ seed4j scaffolds the project skeleton (build config, framework wiring, technical
 - **Business code** (domain logic, use cases, feature-specific adapters) → written by the agent or by hand. When the agent writes it, it **must follow the hexagonal architecture conventions established by seed4j** in this repo (see below).
 
 Available seed4j MCP tools:
+
 - `mcp__seed4j__create_project` — scaffold a new project
 - `mcp__seed4j__list_presets` / `mcp__seed4j__get_preset_details` / `mcp__seed4j__apply_preset` — discover and apply curated module bundles
 - `mcp__seed4j__list_modules` / `mcp__seed4j__search_modules` / `mcp__seed4j__get_module_details` / `mcp__seed4j__get_module_dependencies` — discover individual modules
@@ -31,6 +32,15 @@ When writing business code by hand or with the agent, follow the hexagonal layou
 ## Working with module properties
 
 When a seed4j module requires properties, **never invent values** (project names, package names, ports, database names, credentials, etc.). Ask the user for each required property before calling `apply_module` / `apply_modules`. Use `get_module_details` to see what a module needs, and `validate_properties` to check inputs before applying.
+
+## Coverage policy
+
+**Every feature must ship with tests that bring it to 100% line / function / statement coverage** — this matches the gates seed4j wired in:
+
+- **Backend (JaCoCo):** `jacoco-maven-plugin` runs in the `verify` phase. Any class with missed lines fails the build. Cover every layer of a new feature (domain value objects, application service paths including `findAll` and lookups, REST primary adapters, JPA secondary adapters, JPA entities incl. no-arg constructor and setters) — not just the happy path.
+- **Frontend (vitest istanbul):** `npm run test:coverage` enforces 100% on statements, branches, functions, and lines. Any new file under `src/main/webapp/app/**` needs a matching spec under `src/test/webapp/unit/**`.
+
+A feature is not done until `./mvnw verify` and `npm run test:coverage` both pass locally. CI (`.github/workflows/github-actions.yml`) runs `mvn clean verify` which exercises both.
 
 ## Repository state
 

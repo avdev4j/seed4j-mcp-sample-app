@@ -92,6 +92,23 @@ class BreedsApplicationServiceTest {
   }
 
   @Test
+  void shouldListAllBreeds() {
+    Breed breed = new Breed(BreedId.newId(), new BreedName("cane corso"));
+    when(breeds.findAll()).thenReturn(java.util.List.of(breed));
+
+    assertThat(service.findAll()).containsExactly(breed);
+  }
+
+  @Test
+  void shouldGetExistingBreed() {
+    BreedId id = BreedId.newId();
+    Breed breed = new Breed(id, new BreedName("cane corso"));
+    when(breeds.findById(id)).thenReturn(Optional.of(breed));
+
+    assertThat(service.get(id)).isEqualTo(breed);
+  }
+
+  @Test
   void shouldThrowWhenGettingUnknownBreed() {
     BreedId id = BreedId.newId();
     when(breeds.findById(id)).thenReturn(Optional.empty());
