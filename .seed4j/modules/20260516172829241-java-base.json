@@ -1,0 +1,8 @@
+{
+  "module" : "java-base",
+  "date" : "2026-05-16T17:28:29.241703Z",
+  "properties" : {
+    "packageName" : "com.example.sampleapp",
+    "baseName" : "sampleApp"
+  }
+}

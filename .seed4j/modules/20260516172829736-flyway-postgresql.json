@@ -1,0 +1,7 @@
+{
+  "module" : "flyway-postgresql",
+  "date" : "2026-05-16T17:28:29.736825Z",
+  "properties" : {
+    "packageName" : "com.example.sampleapp"
+  }
+}

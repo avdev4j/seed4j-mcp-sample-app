@@ -1,0 +1,10 @@
+{
+  "module" : "maven-java",
+  "date" : "2026-05-16T17:27:59.438729Z",
+  "properties" : {
+    "projectName" : "Sample App",
+    "baseName" : "sampleApp",
+    "packageName" : "com.example.sampleapp",
+    "nodePackageManager" : "npm"
+  }
+}

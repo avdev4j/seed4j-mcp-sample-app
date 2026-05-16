@@ -1,0 +1,10 @@
+{
+  "module" : "init",
+  "date" : "2026-05-16T17:27:59.259067Z",
+  "properties" : {
+    "projectName" : "Sample App",
+    "baseName" : "sampleApp",
+    "packageName" : "com.example.sampleapp",
+    "nodePackageManager" : "npm"
+  }
+}
