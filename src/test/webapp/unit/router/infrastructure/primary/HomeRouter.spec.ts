@@ -1,8 +1,20 @@
 import HomepageVue from '@/home/infrastructure/primary/HomepageVue.vue';
 import { routes } from '@/router';
 import { mount, type VueWrapper } from '@vue/test-utils';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createRouter, createWebHistory, type Router } from 'vue-router';
+
+vi.mock('@/pet/infrastructure/secondary/AxiosPetRepository', () => ({
+  AxiosPetRepository: class {
+    list = vi.fn().mockResolvedValue([]);
+  },
+}));
+
+vi.mock('@/breed/infrastructure/secondary/AxiosBreedRepository', () => ({
+  AxiosBreedRepository: class {
+    list = vi.fn().mockResolvedValue([]);
+  },
+}));
 
 let router: Router;
 beforeEach(() => {
@@ -27,7 +39,7 @@ describe('Router', () => {
 
       const wrapper = wrap();
 
-      expect(wrapper.html()).toContain('Vue + TypeScript + Vite');
+      expect(wrapper.html()).toContain('Pet Manager');
     });
   });
 });
